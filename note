@@ -1,0 +1,12 @@
+@RestController:返回json数据的控制类
+
+@TableLogic ：逻辑删除注解
+
+@PathVariable ：获取到路径中的值
+
+@GetMapping:能用流程器测试；@PostMapping @DeleteMapping等不能用浏览器测试
+
+整合swagger
+1、生成在线文档
+2、方便接口测试
+

@@ -1,9 +1,12 @@
 package com.lvgr.eduservice.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.lvgr.eduservice.entity.EduTeacher;
+import com.lvgr.eduservice.service.EduTeacherService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 /**
  * <p>
@@ -11,11 +14,33 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author lvgr
- * @since 2020-07-28
+ * @since 2020-07-29
  */
 @RestController
 @RequestMapping("/eduservice/edu-teacher")
 public class EduTeacherController {
+
+    @Autowired
+    private EduTeacherService eduTeacherService;
+
+    /**
+     * 查询讲师表的所有数据
+     */
+    @GetMapping("findAllTeacher")
+    public List<EduTeacher> findAllTeacher(){
+        List<EduTeacher> list = eduTeacherService.list(null);
+        return list;
+    }
+
+    /**
+     * 逻辑删除讲师
+     */
+    @DeleteMapping("{id}")
+    public boolean deleteTeacher(@PathVariable String id) {
+        boolean b = eduTeacherService.removeById(id);
+        return b;
+    }
+
 
 }
 
