@@ -41,7 +41,6 @@ public class EduTeacherController {
     @ApiOperation("查询讲师列表")
     @GetMapping("findAllTeacher")
     public Result findAllTeacher(){
-
 //        try {
 //            int sad =10/0;
 //        }catch (Exception e){
