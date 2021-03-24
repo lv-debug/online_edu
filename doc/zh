@@ -1,0 +1,78 @@
+1、file --> new  --> project --> spring initializr
+2、在父工程的pom.xml里面把org.springframework.boot的版本改为2.2.1
+3、在父工程的pom.xml里面<packaging>pom</packaging>
+3、在父工程的pom.xml里面添加properties的所有依赖的版本
+4、删除父工程的src
+5、添加子工程 file --> new --> module --> maven --> service
+    5.1 配置service模块的pom.xml
+        5.1.1 在service模块的pom.xml里面<packaging>pom</packaging>
+        5.1.2 引入依赖：引入依赖，不需要引版本
+    5.2 添加子工程 file --> new --> module --> maven --> service-edu
+        5.2.1 配置application.properties
+6、代码生成器，创建CodeGenerator类，代码生成器。
+7、编写EduApplication，用于启动类。
+8、编写EduConfig配置类 添加@MapperScan("com.lvgr.eduservice.mapper"),mapper没有实现类，mapper程序扫描不上，所以添加MapperScan注解进行扫描。
+9、测试访问http://localhost:8001/eduservice/edu-teacher/findAllTeacher（只能用于get请求）
+10、整合swagger:创建SawageerConfig类
+    10.1    @ApiOperation("查询讲师列表") swagger会出现中文提示
+11、在业务程序模块要引用swagger，需要业务模块引入依赖
+    11、1    <dependency>
+                <groupId>com.lvgr</groupId>
+                <artifactId>service_edubase</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+
+12、测试其他使用http://localhost:8001/swagger-ui.html。点击Try it out.
+13、添加子工程 file --> new --> module --> maven --> common_utils用于编写系统公共工具
+14、在service的pom引入common_utils便于service模块调用
+15、整合日志：
+    15.1在service-edu--resources下面创建logback-spring.xml
+    15.2注释掉application.properties下的mybatis日志
+    15.3<property name="log.path" value="F:/xiangmu/project/edu/log" />日志输出的地址
+    15.4在ClobalExceptionHandle的类里面增加@Slf4j注解就会把异常信息输出到日志文件log-error里面。
+16、整合异常
+    16.1 开发ClobalExceptionHandle全局异步异常处理
+    16.2 开发异常工具类ExceptionUtil
+
+17、整合阿里云oss
+    17.1 开通oss，创建bucket,生成密钥
+    17.2 创建service-oss模块用于整合oss
+    17.3 创建oss的application.properties文件配置oss信息
+    17.4 引入相关依赖
+    17.5 创建常量读取配置内容ConstantPropertiesUtils
+    17.6 创建upload方法实现上传
+
+18. nginx：反向代理服务器
+    18.1：请求转发（根据请求转发到具体的服务器中）、负载均衡（把请求平均分担到不同的服务器上）、动静分离
+    18.2：请求转发配置方法(用于本项目8001和8002的请求转发)：在nginx的conf的nginx.conf修改。
+        18.2.1 server {
+                      listen       81;
+                      }
+        18.2.2 #9001:监听的端口，localhost:主机，ocation ~ /eduservice匹配路径
+               	server {
+                    listen       9009;
+                    server_name  localhost;
+
+                    location ~ /eduservice/ {
+                        proxy http://localhost:8001;
+                    }
+                    location ~ /eduoss/ {
+                        proxy http://localhost:8002;
+                    }
+
+                }
+        18.2.3 修改前端请求地址为：9009.
+        18.2.4 需要启动nginx。启动方法：nginx.exe
+
+19 整合EasyExcel：是阿里巴巴开源的一个excel处理框架，以使用简单、节省内存著称
+    19.1：引入依赖
+        19.1.1 <dependencies>
+                   <dependency>
+                       <groupId>com.alibaba</groupId>
+                       <artifactId>easyexcel</artifactId>
+                       <version>2.1.1</version>
+                   </dependency>
+               </dependencies>
+
+    19.2 :TestExcelWrite.class 实现写的操作
+    19.3 :TestExcelRead.class实现读的操作

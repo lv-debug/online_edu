@@ -12,8 +12,9 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import org.junit.Test;
 
 /**
- * @author
- * @since 2018/12/13
+ * @author lvgr
+ * @date 2018/12/13
+ * @desc:代码生成器
  */
 public class CodeGenerator {
 
@@ -31,7 +32,7 @@ public class CodeGenerator {
         gc.setOpen(false); //生成后是否打开资源管理器
         gc.setFileOverride(false); //重新生成时文件是否覆盖
         gc.setServiceName("%sService");	//去掉Service接口的首字母I
-        gc.setIdType(IdType.ID_WORKER); //主键策略
+        gc.setIdType(IdType.ID_WORKER_STR); //主键策略
         gc.setDateType(DateType.ONLY_DATE);//定义生成的实体类中日期类型
         gc.setSwagger2(true);//开启Swagger2模式
 
@@ -58,15 +59,20 @@ public class CodeGenerator {
 
         // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setInclude("edu_teacher");
-        strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
-        strategy.setTablePrefix(pc.getModuleName() + "_"); //生成实体时去掉表前缀
-
-        strategy.setColumnNaming(NamingStrategy.underline_to_camel);//数据库表字段映射到实体的命名策略
-        strategy.setEntityLombokModel(true); // lombok 模型 @Accessors(chain = true) setter链式操作
-
-        strategy.setRestControllerStyle(true); //restful api风格控制器
-        strategy.setControllerMappingHyphenStyle(true); //url中驼峰转连字符
+        //表名
+        strategy.setInclude("edu_course","edu_course_description","edu_chapter","edu_video");
+        //数据库表映射到实体的命名策略
+        strategy.setNaming(NamingStrategy.underline_to_camel);
+        //生成实体时去掉表前缀
+        strategy.setTablePrefix(pc.getModuleName() + "_");
+        //数据库表字段映射到实体的命名策略
+        strategy.setColumnNaming(NamingStrategy.underline_to_camel);
+        // lombok 模型 @Accessors(chain = true) setter链式操作
+        strategy.setEntityLombokModel(true);
+        //restful api风格控制器
+        strategy.setRestControllerStyle(true);
+        //url中驼峰转连字符
+        strategy.setControllerMappingHyphenStyle(true);
 
         mpg.setStrategy(strategy);
 

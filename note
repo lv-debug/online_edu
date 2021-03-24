@@ -10,3 +10,7 @@
 1、生成在线文档
 2、方便接口测试
 
+步骤：
+1、引入swagger相关依赖
+2、配置SwaggerConfig文件
+3、把SwaggerConfig引入到EduConfig里面

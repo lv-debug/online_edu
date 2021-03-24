@@ -11,5 +11,14 @@
 
     <artifactId>service_edubase</artifactId>
 
+    <!--引入common_utils的依赖-->
+    <dependencies>
+        <dependency>
+            <groupId>com.lvgr</groupId>
+            <artifactId>common_utils</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 
 </project>

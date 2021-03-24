@@ -19,6 +19,7 @@
     <name>online_edu</name>
     <description>Demo project for Spring Boot</description>
 
+    <!--依赖的版本-->
     <properties>
         <java.version>1.8</java.version>
         <guli.version>0.0.1-SNAPSHOT</guli.version>
@@ -47,6 +48,7 @@
         <mysql-connector>5.1.47</mysql-connector>
     </properties>
 
+    <!--项目的依赖-->
     <dependencyManagement>
         <dependencies>
             <!--Spring Cloud-->
@@ -88,7 +90,7 @@
                 <artifactId>springfox-swagger-ui</artifactId>
                 <version>${swagger.version}</version>
             </dependency>
-            <!--aliyunOSS-->
+            <!--aliyunOSS 对象存储 -->
             <dependency>
                 <groupId>com.aliyun.oss</groupId>
                 <artifactId>aliyun-sdk-oss</artifactId>

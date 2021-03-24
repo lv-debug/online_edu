@@ -14,12 +14,16 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * @author lvgr
  * @date 2020/7/29 23:27
- * @desc
+ * @desc:整合swagger
  */
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
 
+    /**
+     * swagger插件
+     * @return
+     */
     @Bean
     public Docket webApiConfig(){
         return new Docket(DocumentationType.SWAGGER_2)
@@ -36,7 +40,7 @@ public class SwaggerConfig {
                 .title("网站-课程中心API文档")
                 .description("本文档描述了课程中心微服务接口定义")
                 .version("1.0")
-                .contact(new Contact("Helen", "http://atguigu.com", "55317332@qq.com"))
+                .contact(new Contact("lvgr", "http://atguigu.com", "lvgr888@163.com"))
                 .build();
     }
 }
