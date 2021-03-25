@@ -44,9 +44,7 @@ public class EduSubjectController {
     public Result getAllsubject(){
 
         List<Map<String,Object>> allsubject = eduSubjectService.getAllsubject();
-
         Object jsonObject = JSON.toJSON(allsubject);
-
         return Result.ok().data("jsonObject",jsonObject);
     }
 

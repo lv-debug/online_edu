@@ -76,3 +76,20 @@
 
     19.2 :TestExcelWrite.class 实现写的操作
     19.3 :TestExcelRead.class实现读的操作
+
+20 整合自动创建时间和修改时间
+    20.1 通过MyMetaObjectHandle.class实现implements MetaObjectHandler方法、
+    20.2 再实体类中创建时间和修改时间上面增加@TableField(fill = FieldFill.INSERT)和@TableField(fill = FieldFill.INSERT_UPDATE)
+
+21 整合逻辑删除
+    21.1 在逻辑删除字段上面添加@TableLogic
+    21.2 注入bean:ISqlInjector
+
+
+
+
+
+
+
+
+

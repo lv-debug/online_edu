@@ -1,9 +1,13 @@
 package com.lvgr.eduservice.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import com.lvgr.eduservice.entity.vo.CourseInfoVo;
+import com.lvgr.eduservice.service.EduCourseService;
+import com.lvgr.utils.Result;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -13,9 +17,25 @@ import org.springframework.web.bind.annotation.RestController;
  * @author lvgr
  * @since 2021-03-24
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/eduservice/edu-course")
+@Api(description = "课程管理")
 public class EduCourseController {
+
+    @Autowired
+    private EduCourseService eduCourseService;
+
+    @PostMapping("addCourseInfo")
+    @ApiOperation("新增课程")
+    public Result addCourseInfo(@RequestBody CourseInfoVo courseInfoVo) {
+
+        String cId = eduCourseService.addCourseInfo(courseInfoVo);
+        return Result.ok().data("cId",cId);
+    }
+
+
+
 
 }
 

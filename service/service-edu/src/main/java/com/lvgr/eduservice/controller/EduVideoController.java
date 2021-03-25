@@ -1,6 +1,8 @@
 package com.lvgr.eduservice.controller;
 
 
+import io.swagger.annotations.Api;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/eduservice/edu-video")
+@CrossOrigin
+@Api(description = "课程小节管理")
 public class EduVideoController {
 
 }
