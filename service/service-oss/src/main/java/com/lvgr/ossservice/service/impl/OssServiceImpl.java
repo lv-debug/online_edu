@@ -32,7 +32,6 @@ public class OssServiceImpl implements OssService {
         try {
             // 创建OSSClient实例。
             OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
-
             // 获取上传的文件流。
             InputStream inputStream = file.getInputStream();
             //文件按照日期分类
