@@ -1,6 +1,7 @@
 package com.lvgr.eduservice.controller;
 
 
+import com.lvgr.eduservice.entity.EduChapter;
 import com.lvgr.eduservice.entity.chapter.ChapterVo;
 import com.lvgr.eduservice.service.EduChapterService;
 import com.lvgr.utils.Result;
@@ -36,5 +37,41 @@ public class EduChapterController {
         return Result.ok().data("chapterVos",chapterVos);
     }
 
+    @ApiOperation(value = "添加章节")
+    @PostMapping("addChapter")
+    public Result addChapter(@RequestBody EduChapter eduChapter){
+
+        eduChapterService.save(eduChapter);
+        return Result.ok();
+    }
+
+
+    @ApiOperation(value = "根据章节id查询")
+    @GetMapping("getChapter/{chapterId}")
+    public Result getChapter(@PathVariable String chapterId){
+
+        EduChapter eduChapter = eduChapterService.getById(chapterId);
+        return Result.ok().data("eduChapter",eduChapter);
+    }
+
+    @ApiOperation(value = "修改章节")
+    @PostMapping("updateChapter")
+    public Result updateChapter(@RequestBody EduChapter eduChapter){
+
+        eduChapterService.updateById(eduChapter);
+        return Result.ok();
+    }
+
+    @ApiOperation(value = "删除章节")
+    @DeleteMapping("delChapter/{chapterId}")
+    public Result delChapter(@PathVariable String chapterId){
+
+        boolean b = eduChapterService.delChapterById(chapterId);
+        if(b){
+            return Result.ok();
+        } else {
+            return Result.error();
+        }
+    }
 }
 

@@ -1,6 +1,7 @@
 package com.lvgr.eduservice.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.lvgr.edubase.exceptionhandle.EduException;
 import com.lvgr.eduservice.entity.EduChapter;
 import com.lvgr.eduservice.entity.EduVideo;
 import com.lvgr.eduservice.entity.chapter.ChapterVo;
@@ -54,5 +55,19 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
             chapterVos.add(chapterVo);
         });
         return chapterVos;
+    }
+
+    @Override
+    public boolean delChapterById(String chapterId) {
+        QueryWrapper<EduVideo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("chapter_id",chapterId);
+        int size = eduVideoService.count(queryWrapper);
+        if(size > 0) {
+            throw new EduException(20001,"删除的章节包含小节，禁止删除");
+        }else {
+            int i = baseMapper.deleteById(chapterId);
+            return i > 0;
+        }
+
     }
 }
