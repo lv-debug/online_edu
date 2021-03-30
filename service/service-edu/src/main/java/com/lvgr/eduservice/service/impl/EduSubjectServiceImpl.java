@@ -73,7 +73,6 @@ public class EduSubjectServiceImpl extends ServiceImpl<EduSubjectMapper, EduSubj
                 mapSon.put("label",eduSubjectSon.getTitle());
                 listMapSon.add(mapSon);
             });
-
             map.put("children",listMapSon);
             listMap.add(map);
         });
