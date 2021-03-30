@@ -34,6 +34,22 @@ public class EduCourseController {
         return Result.ok().data("cId",cId);
     }
 
+    @GetMapping("getCourseInfo/{courseId}")
+    @ApiOperation("根据id获取课程")
+    public Result getCourseInfo(@PathVariable String courseId) {
+
+        CourseInfoVo courseInfoVo = eduCourseService.getCourseInfo(courseId);
+        return Result.ok().data("courseInfoVo",courseInfoVo);
+    }
+
+    @PostMapping("updateCourseInfo")
+    @ApiOperation("修改课程")
+    public Result updateCourseInfo(@RequestBody CourseInfoVo courseInfoVo) {
+
+        eduCourseService.updateCourseInfo(courseInfoVo);
+        return Result.ok();
+    }
+
 
 
 

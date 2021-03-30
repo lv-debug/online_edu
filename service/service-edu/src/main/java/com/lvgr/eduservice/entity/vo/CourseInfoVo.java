@@ -16,6 +16,10 @@ import java.math.BigDecimal;
 public class CourseInfoVo {
     private static final long serialVersionUID = 1L;
 
+
+    @ApiModelProperty(value = "课程id")
+    private String id;
+
     @ApiModelProperty(value = "课程讲师ID")
     private String teacherId;
 
@@ -40,4 +44,5 @@ public class CourseInfoVo {
 
     @ApiModelProperty(value = "课程简介")
     private String description;
+
 }
