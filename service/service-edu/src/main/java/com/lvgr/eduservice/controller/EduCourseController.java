@@ -2,6 +2,7 @@ package com.lvgr.eduservice.controller;
 
 
 import com.lvgr.eduservice.entity.vo.CourseInfoVo;
+import com.lvgr.eduservice.entity.vo.CoursePublishVo;
 import com.lvgr.eduservice.service.EduCourseService;
 import com.lvgr.utils.Result;
 import io.swagger.annotations.Api;
@@ -48,6 +49,14 @@ public class EduCourseController {
 
         eduCourseService.updateCourseInfo(courseInfoVo);
         return Result.ok();
+    }
+
+    @PostMapping("getCoursePublishVoById/{courseId}")
+    @ApiOperation("根据课程id查询课程发布信息")
+    public Result getCoursePublishVoById(@PathVariable String courseId) {
+
+        CoursePublishVo coursePublishVo = eduCourseService.getCoursePublishVoById(courseId);
+        return Result.ok().data("coursePublishVo",coursePublishVo);
     }
 
 

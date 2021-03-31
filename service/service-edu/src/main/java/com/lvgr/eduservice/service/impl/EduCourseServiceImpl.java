@@ -5,6 +5,7 @@ import com.lvgr.edubase.exceptionhandle.EduException;
 import com.lvgr.eduservice.entity.EduCourse;
 import com.lvgr.eduservice.entity.EduCourseDescription;
 import com.lvgr.eduservice.entity.vo.CourseInfoVo;
+import com.lvgr.eduservice.entity.vo.CoursePublishVo;
 import com.lvgr.eduservice.mapper.EduCourseMapper;
 import com.lvgr.eduservice.service.EduCourseDescriptionService;
 import com.lvgr.eduservice.service.EduCourseService;
@@ -26,6 +27,8 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
 
     @Autowired
     private EduCourseDescriptionService eduCourseDescriptionService;
+    @Autowired
+    private EduCourseMapper eduCourseMapper;
 
     @Override
     public String addCourseInfo(CourseInfoVo courseInfoVo) {
@@ -81,5 +84,11 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         if(!b){
             throw new EduException(20001,"修改课程简介失败");
         }
+    }
+
+    @Override
+    public CoursePublishVo getCoursePublishVoById(String courseId) {
+        CoursePublishVo coursePublishVo = eduCourseMapper.selectCoursePublishVoById(courseId);
+        return coursePublishVo;
     }
 }

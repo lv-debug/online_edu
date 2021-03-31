@@ -2,6 +2,7 @@ package com.lvgr.eduservice.mapper;
 
 import com.lvgr.eduservice.entity.EduCourse;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.lvgr.eduservice.entity.vo.CoursePublishVo;
 
 /**
  * <p>
@@ -12,5 +13,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2021-03-24
  */
 public interface EduCourseMapper extends BaseMapper<EduCourse> {
+
+    /**
+     * 根据课程id查询课程基本信息
+     */
+    CoursePublishVo selectCoursePublishVoById(String courseId);
 
 }

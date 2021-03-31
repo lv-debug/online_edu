@@ -1,11 +1,14 @@
 package com.lvgr.eduservice.controller;
 
 
+import com.lvgr.eduservice.entity.EduChapter;
+import com.lvgr.eduservice.entity.EduVideo;
+import com.lvgr.eduservice.service.EduVideoService;
+import com.lvgr.utils.Result;
 import io.swagger.annotations.Api;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -20,6 +23,45 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @Api(description = "课程小节管理")
 public class EduVideoController {
+
+    @Autowired
+    private EduVideoService eduVideoService;
+
+    @ApiOperation("新增小节")
+    @PostMapping("addEduVideo")
+    private Result addEduVideo(@RequestBody EduVideo eduVideo) {
+
+        eduVideoService.save(eduVideo);
+        return Result.ok();
+    }
+
+    @ApiOperation("修改小节")
+    @PostMapping("updateEduVideo")
+    private Result updateEduVideo(@RequestBody EduVideo eduVideo) {
+
+        eduVideoService.updateById(eduVideo);
+        return Result.ok();
+    }
+
+    @ApiOperation("删除小节")
+    @DeleteMapping("delEduVideo/{videoId}")
+    private Result delEduVideo(@PathVariable String videoId) {
+
+        boolean b = eduVideoService.removeById(videoId);
+        if(b) {
+            return Result.ok();
+        }else{
+            return Result.error();
+        }
+    }
+
+    @ApiOperation(value = "根据小节id查询")
+    @GetMapping("getVideo/{videoId}")
+    public Result getVideo(@PathVariable String videoId){
+
+        EduVideo eduVideo = eduVideoService.getById(videoId);
+        return Result.ok().data("eduVideo",eduVideo);
+    }
 
 }
 
