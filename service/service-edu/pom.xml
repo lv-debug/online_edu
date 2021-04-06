@@ -11,7 +11,7 @@
 
     <artifactId>service-edu</artifactId>
 
-    <!--引入alibaba的easyexcel依赖-->
+    <!--引入alibaba的easyexcel依赖，用于excel上传和格式-->
     <dependencies>
         <dependency>
             <groupId>com.alibaba</groupId>

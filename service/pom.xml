@@ -14,6 +14,7 @@
     <modules>
         <module>service-edu</module>
         <module>service-oss</module>
+        <module>service-vod</module>
     </modules>
     <dependencies>
         <dependency>
@@ -109,5 +110,16 @@
         </dependency>
 
     </dependencies>
-
+    <build>
+        <!--调用mybatis的xml需要的配置 **表示多层目录-->
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
 </project>

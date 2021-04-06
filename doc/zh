@@ -35,7 +35,7 @@
     16.2 开发异常工具类ExceptionUtil
 
 17、整合阿里云oss
-    17.1 开通oss，创建bucket,生成密钥
+    17.1 开通oss：https://oss.console.aliyun.com/bucket/oss-cn-chengdu/edu-lvgr/overview，创建bucket,生成密钥
     17.2 创建service-oss模块用于整合oss
     17.3 创建oss的application.properties文件配置oss信息
     17.4 引入相关依赖
@@ -85,6 +85,12 @@
     21.1 在逻辑删除字段上面添加@TableLogic
     21.2 注入bean:ISqlInjector
 
+22 整合阿里云视频点播：需要oss对象存储
+    22.1 开通视频点播https://vod.console.aliyun.com/#/overview
+    22.2 创建service-vod
+    22.3 在service-vod的pom引入依赖
+    22.4 初始化InitObject类，编写初始方法
+    22.5 根据视频Id获取视频地址和凭证，本地上传到阿里云。TestVod类
 
 
 

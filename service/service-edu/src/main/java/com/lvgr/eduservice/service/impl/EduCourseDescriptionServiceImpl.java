@@ -1,5 +1,7 @@
 package com.lvgr.eduservice.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.lvgr.eduservice.entity.EduChapter;
 import com.lvgr.eduservice.entity.EduCourseDescription;
 import com.lvgr.eduservice.mapper.EduCourseDescriptionMapper;
 import com.lvgr.eduservice.service.EduCourseDescriptionService;

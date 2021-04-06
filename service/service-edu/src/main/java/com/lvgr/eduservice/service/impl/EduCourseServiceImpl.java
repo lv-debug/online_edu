@@ -7,9 +7,11 @@ import com.lvgr.eduservice.entity.EduCourseDescription;
 import com.lvgr.eduservice.entity.vo.CourseInfoVo;
 import com.lvgr.eduservice.entity.vo.CoursePublishVo;
 import com.lvgr.eduservice.mapper.EduCourseMapper;
+import com.lvgr.eduservice.service.EduChapterService;
 import com.lvgr.eduservice.service.EduCourseDescriptionService;
 import com.lvgr.eduservice.service.EduCourseService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.lvgr.eduservice.service.EduVideoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +30,11 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     @Autowired
     private EduCourseDescriptionService eduCourseDescriptionService;
     @Autowired
-    private EduCourseMapper eduCourseMapper;
+    private EduVideoService eduVideoService;
+    @Autowired
+    private EduChapterService eduChapterService;
+
+
 
     @Override
     public String addCourseInfo(CourseInfoVo courseInfoVo) {
@@ -88,7 +94,21 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
 
     @Override
     public CoursePublishVo getCoursePublishVoById(String courseId) {
-        CoursePublishVo coursePublishVo = eduCourseMapper.selectCoursePublishVoById(courseId);
+        CoursePublishVo coursePublishVo = baseMapper.selectCoursePublishVoById(courseId);
         return coursePublishVo;
+    }
+
+    @Override
+    public Boolean deleteCourse(String courseId) {
+        //根据课程id删除小节
+        eduVideoService.removeByCourseId(courseId);
+        //删除章节
+        eduChapterService.removeByCourseId(courseId);
+        //删除描述
+        eduCourseDescriptionService.removeById(courseId);
+        //删除课程
+        int i = baseMapper.deleteById(courseId);
+
+        return i > 0;
     }
 }
