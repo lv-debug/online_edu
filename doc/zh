@@ -91,6 +91,8 @@
     22.3 在service-vod的pom引入依赖
     22.4 初始化InitObject类，编写初始方法
     22.5 根据视频Id获取视频地址和凭证，本地上传到阿里云。TestVod类
+    22.6 上传视频 找到VODUploadDemo-java-1.4.11文件 在lib目录里面进行cmd.输入mvn install:install-file -DgroupId=com.aliyun -DartifactId=aliyun-sdk-vod-upload -Dversion=1.4.11 -Dpackaging=jar -Dfile=aliyun-java-vod-upload-1.4.11.jar引入相关依赖
+    22.7 配置vod项目的配置文件application
 
 
 
