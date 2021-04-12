@@ -1,6 +1,8 @@
 package com.lvgr.eduservice.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.lvgr.eduservice.client.VodClient;
 import com.lvgr.eduservice.entity.EduChapter;
 import com.lvgr.eduservice.entity.EduVideo;
 import com.lvgr.eduservice.service.EduVideoService;
@@ -8,6 +10,7 @@ import com.lvgr.utils.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -26,6 +29,9 @@ public class EduVideoController {
 
     @Autowired
     private EduVideoService eduVideoService;
+
+    @Autowired
+    private VodClient vodClient;
 
     @ApiOperation("新增小节")
     @PostMapping("addEduVideo")
@@ -46,7 +52,11 @@ public class EduVideoController {
     @ApiOperation("删除小节")
     @DeleteMapping("delEduVideo/{videoId}")
     private Result delEduVideo(@PathVariable String videoId) {
-
+        //根据小节Id获取视频Id
+        EduVideo eduVideo = eduVideoService.getById(videoId);
+        if(!StringUtils.isEmpty(eduVideo.getVideoSourceId())) {
+            vodClient.removeAliyVod(eduVideo.getVideoSourceId());
+        }
         boolean b = eduVideoService.removeById(videoId);
         if(b) {
             return Result.ok();

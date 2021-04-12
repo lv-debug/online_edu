@@ -36,7 +36,7 @@ public class VodServiceImpl implements VodService {
         try {
             String accessKeyId = ConstantVodUtils.KEY_ID;
             String accessKeySecret = ConstantVodUtils.KEY_SECRET;
-            String title = "上传的名称";
+            String title = file.getName();
             String fileName = file.getOriginalFilename();
             inputStream = file.getInputStream();
             UploadStreamRequest request = new UploadStreamRequest(accessKeyId, accessKeySecret, title, fileName, inputStream);

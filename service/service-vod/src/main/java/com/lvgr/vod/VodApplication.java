@@ -3,6 +3,7 @@ package com.lvgr.vod;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
  * exclude = DataSourceAutoConfiguration.class:禁止springboot自动注入数据源配置,由于做oss文件处理，所以不需要关联数据库。如果不加会报错。
  */
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+@EnableDiscoveryClient
 @ComponentScan(basePackages = {"com.lvgr"})
 public class VodApplication {
 

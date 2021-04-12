@@ -28,12 +28,12 @@ public class VodController {
         return Result.ok().data("videoId",videoId);
     }
 
-    @DeleteMapping("removeAliyVod/{vodId}")
-    public Result removeAliyVod(@PathVariable String vodId) {
+    @DeleteMapping("removeAliyVod/{videoId}")
+    public Result removeAliyVod(@PathVariable String videoId) {
         try {
             DefaultAcsClient initVodClient = InitVodClient.initVodClient(ConstantVodUtils.KEY_ID,ConstantVodUtils.KEY_SECRET);
             DeleteVideoRequest deleteVideoRequest = new DeleteVideoRequest();
-            deleteVideoRequest.setVideoIds(vodId);
+            deleteVideoRequest.setVideoIds(videoId);
             initVodClient.getAcsResponse(deleteVideoRequest);
             return Result.ok();
         }catch (Exception e) {

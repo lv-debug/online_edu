@@ -96,6 +96,31 @@
     22.8 在nginx的配置文件反向代理和client_max_body_size 1024m(设置nginx代理的文件代理最大的大小);
 
 
+23 springCloud实现服务之间的调用，注册中心（Nacos）:
+    23.1 相当于现实中的房产中介，Nacos就是实现各个微服务模块注册在Nacos，注册后各个服务就可以实现相互调用。
+    23.2 阿里巴巴新的开源框架
+    23.2 E:\edu\nacos\bin\双击stratup启动
+    23.3 地址：localhost:8848\nacos 用户名：nacos 密码:nacos
+    23.4 nacos里面注册
+        23.4.1 在service的pom引入依赖
+                <dependency>
+                    <groupId>org.springframework.cloud</groupId>
+                    <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                </dependency>
+        23.4.2 在application里面配置nacos地址 spring.cloud.nacos.discovery.server-addr=127.0.0.1:8848
+        23.4.3 在对应的启动类中添加注解：EnableDiscoveryClient 表示nacos注册
+    23.5 feign设置
+        23.5.1 引入依赖
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+            </dependency>
+        23.5.2 在调用端 写代码（service-edu）在启动类上面加@EnableFeignClients
+        23.5.3 创建interface : VodClient 实现代码
+        23.5.4 在被调用端的业务逻辑处注入 VodClient
+            @Autowired
+            private VodClient vodClient;
+        23.5.5 vodClient.removeAliyVod(videoId);
 
 
 
