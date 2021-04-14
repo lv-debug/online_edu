@@ -22,16 +22,18 @@
             <artifactId>service_edubase</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-        <!--以下的暂时注释，暂时不用-->
-        <!--<dependency>
+
+        <!--springcloud相关依赖开始-->
+        <!--负载均衡 以下的暂时注释，暂时不用-->
+        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
-        </dependency>-->
-        <!--hystrix依赖，主要是用  @HystrixCommand -->
-        <!--<dependency>
+        </dependency>
+        <!--熔断器 hystrix依赖，主要是用  @HystrixCommand -->
+        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-        </dependency>-->
+        </dependency>
         <!--服务注册-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -42,6 +44,7 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
+        <!--springcloud相关依赖结束-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

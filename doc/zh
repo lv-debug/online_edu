@@ -96,7 +96,7 @@
     22.8 在nginx的配置文件反向代理和client_max_body_size 1024m(设置nginx代理的文件代理最大的大小);
 
 
-23 springCloud实现服务之间的调用，注册中心（Nacos）:
+23 springCloud实现服务之间的调用，注册中心,服务发现:（Nacos）:
     23.1 相当于现实中的房产中介，Nacos就是实现各个微服务模块注册在Nacos，注册后各个服务就可以实现相互调用。
     23.2 阿里巴巴新的开源框架
     23.2 E:\edu\nacos\bin\双击stratup启动
@@ -109,7 +109,7 @@
                 </dependency>
         23.4.2 在application里面配置nacos地址 spring.cloud.nacos.discovery.server-addr=127.0.0.1:8848
         23.4.3 在对应的启动类中添加注解：EnableDiscoveryClient 表示nacos注册
-    23.5 feign设置
+    23.5 服务调用:feign设置
         23.5.1 引入依赖
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
@@ -121,6 +121,19 @@
             @Autowired
             private VodClient vodClient;
         23.5.5 vodClient.removeAliyVod(videoId);
+    23.6 熔断器 ：hystrix(当被调用的服务器发生宕机，熔断器会熔断该服务，不让后面的服务调用)
+        23.6.1 引入依赖
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+            </dependency>
+        23.6.2 在调用端的application配置文件中进行配置
+            #开启熔断机制
+            feign.hystrix.enabled=true
+            # 设置hystrix超时时间，默认1000ms
+            hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds=6000
+        23.6.3 在VodClient添加注解@FeignClient(name = "service-vod",fallback = VodClientErrorImpl.class)
+        23.6.4 VodClientErrorImpl实现于在VodClient添加注解，表示出错后会执行的方法
 
 
 

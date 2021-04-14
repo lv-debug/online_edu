@@ -5,13 +5,20 @@ import com.aliyun.vod.upload.req.UploadFileStreamRequest;
 import com.aliyun.vod.upload.req.UploadStreamRequest;
 import com.aliyun.vod.upload.resp.UploadFileStreamResponse;
 import com.aliyun.vod.upload.resp.UploadStreamResponse;
+import com.aliyuncs.DefaultAcsClient;
+import com.aliyuncs.vod.model.v20170321.DeleteVideoRequest;
+import com.lvgr.edubase.exceptionhandle.EduException;
+import com.lvgr.utils.Result;
 import com.lvgr.vod.service.VodService;
 import com.lvgr.vod.utils.ConstantVodUtils;
+import com.lvgr.vod.utils.InitVodClient;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * 视频上传实现类
@@ -54,6 +61,21 @@ public class VodServiceImpl implements VodService {
         } catch (IOException e) {
             e.printStackTrace();
             return "";
+        }
+    }
+
+    @Override
+    public void deleteBatch(List<String> videoIds) {
+        try {
+            DefaultAcsClient initVodClient = InitVodClient.initVodClient(ConstantVodUtils.KEY_ID,ConstantVodUtils.KEY_SECRET);
+            DeleteVideoRequest deleteVideoRequest = new DeleteVideoRequest();
+            Object[] objects = videoIds.toArray();
+            String videoIdsSet = StringUtils.join(objects, ",");
+            deleteVideoRequest.setVideoIds(videoIdsSet);
+            initVodClient.getAcsResponse(deleteVideoRequest);
+        }catch (Exception e) {
+            e.printStackTrace();
+            throw new EduException(20001,"删除阿里云视频失败");
         }
     }
 }

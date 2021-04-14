@@ -2,6 +2,7 @@ package com.lvgr.eduservice.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.lvgr.edubase.exceptionhandle.EduException;
 import com.lvgr.eduservice.client.VodClient;
 import com.lvgr.eduservice.entity.EduChapter;
 import com.lvgr.eduservice.entity.EduVideo;
@@ -55,7 +56,10 @@ public class EduVideoController {
         //根据小节Id获取视频Id
         EduVideo eduVideo = eduVideoService.getById(videoId);
         if(!StringUtils.isEmpty(eduVideo.getVideoSourceId())) {
-            vodClient.removeAliyVod(eduVideo.getVideoSourceId());
+            Result result = vodClient.removeAliyVod(eduVideo.getVideoSourceId());
+            if(result.getCode() == 20001) {
+                throw new EduException(20001,"删除视频失败，熔断器");
+            }
         }
         boolean b = eduVideoService.removeById(videoId);
         if(b) {
