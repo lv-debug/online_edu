@@ -10,7 +10,8 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @author lvgr
  * @date 2020/7/29 21:54
- * @desc
+ * @desc 该类是连接数据库的配置类，还可以在启动类上面加@MapperScan("com.lvgr.cmsservice.mapper")，
+ * 也可以把mapper注入进来。两种方式都可以，当前这种方式是因为在里面加入了逻辑删除插件和分页插件，所以编写了配置类。
  */
 @Configuration
 @MapperScan("com.lvgr.eduservice.mapper")

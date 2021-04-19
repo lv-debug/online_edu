@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 /**
  * @author lvgr
  * @date 2020/7/29 21:51
- * @desc
+ * @desc 用于后台管理端业务
  */
 
 /**

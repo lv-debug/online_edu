@@ -14,7 +14,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lvgr.eduservice.service.EduVideoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -110,5 +113,14 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         int i = baseMapper.deleteById(courseId);
 
         return i > 0;
+    }
+
+    @Cacheable(value="eduCourse",key="'selectEduCourse'")
+    @Override
+    public List<EduCourse> eduCourseList() {
+        QueryWrapper<EduCourse> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("id");
+        queryWrapper.last("limit 8");
+        return baseMapper.selectList(queryWrapper);
     }
 }

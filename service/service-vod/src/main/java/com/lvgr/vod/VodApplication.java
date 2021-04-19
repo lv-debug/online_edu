@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 /**
  *  * @author lvgr
  *  * @date 2021/4/6 22:11
- *  * @desc 视频点播启动类
+ *  * @desc 用于上传视频点播至阿里云启动类
  * exclude = DataSourceAutoConfiguration.class:禁止springboot自动注入数据源配置,由于做oss文件处理，所以不需要关联数据库。如果不加会报错。
  */
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)

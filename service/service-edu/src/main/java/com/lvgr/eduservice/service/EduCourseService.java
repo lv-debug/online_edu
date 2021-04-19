@@ -1,9 +1,12 @@
 package com.lvgr.eduservice.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.lvgr.eduservice.entity.EduCourse;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lvgr.eduservice.entity.vo.CourseInfoVo;
 import com.lvgr.eduservice.entity.vo.CoursePublishVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -24,4 +27,6 @@ public interface EduCourseService extends IService<EduCourse> {
     CoursePublishVo getCoursePublishVoById(String courseId);
 
     Boolean deleteCourse(String courseId);
+
+    List<EduCourse> eduCourseList();
 }
