@@ -174,4 +174,9 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         //map返回
         return map;
     }
+
+    @Override
+    public EduCourse getCourseDescById(String courseId) {
+        return null;
+    }
 }
