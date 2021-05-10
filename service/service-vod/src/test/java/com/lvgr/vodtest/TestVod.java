@@ -23,8 +23,8 @@ public class TestVod {
         getAcsByid();
 
         //上传视频
-        String accessKeyId ="LTAI4FyMSuPTw9wEEKxjZdmS";
-        String accessKeySecret = "geJ5KnrtHfyAzE0v4rbJ3Exd924l3n";
+        String accessKeyId ="";
+        String accessKeySecret = "";
         String title = "名称";
         String fileName = "E:/edu/document/资料/1-阿里云上传测试视频/6 - What If I Want to Move Faster.mp4";
         uploadToAliyun(accessKeyId,accessKeySecret,title,fileName);
