@@ -107,7 +107,7 @@ public class TestVod {
         DefaultAcsClient client = null;
         try {
             //创建初始化对象
-            client = InitObject.initVodClient("LTAI4FyMSuPTw9wEEKxjZdmS", "geJ5KnrtHfyAzE0v4rbJ3Exd924l3n");
+            client = InitObject.initVodClient("", "");
 
             //创建获取视频地址request和respone
             GetVideoPlayAuthRequest request = new GetVideoPlayAuthRequest();
