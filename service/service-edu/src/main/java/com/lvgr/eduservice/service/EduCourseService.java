@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lvgr.eduservice.entity.EduCourse;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lvgr.eduservice.entity.grontvo.CourseFrontVo;
+import com.lvgr.eduservice.entity.grontvo.CourseWebVo;
 import com.lvgr.eduservice.entity.vo.CourseInfoVo;
 import com.lvgr.eduservice.entity.vo.CoursePublishVo;
 
@@ -35,5 +36,5 @@ public interface EduCourseService extends IService<EduCourse> {
 
     Map<String, Object> getCourseFrontList(Page<EduCourse> pageCourse, CourseFrontVo courseFrontVo);
 
-    EduCourse getCourseDescById(String courseId);
+    CourseWebVo getCourseDescById(String courseId);
 }

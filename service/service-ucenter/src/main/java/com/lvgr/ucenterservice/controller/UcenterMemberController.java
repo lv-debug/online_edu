@@ -6,8 +6,10 @@ import com.lvgr.ucenterservice.entity.vo.RegisterVo;
 import com.lvgr.ucenterservice.service.UcenterMemberService;
 import com.lvgr.utils.JwtUtils;
 import com.lvgr.utils.Result;
+import com.lvgr.utils.ordervo.UcenterMemberOrder;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,6 +55,15 @@ public class UcenterMemberController {
         //查询数据库根据用户id获取用户信息
         UcenterMember member = ucenterMemberService.getById(memberId);
         return Result.ok().data("userInfo",member);
+    }
+
+    @PostMapping("getUserByOrder/{id}")
+    @ApiOperation("根据用户id获取用户")
+    public UcenterMemberOrder getUserByOrder(@PathVariable String id){
+        UcenterMember ucenterMember = ucenterMemberService.getById(id);
+        UcenterMemberOrder ucenterMemberOrder = new UcenterMemberOrder();
+        BeanUtils.copyProperties(ucenterMember,ucenterMemberOrder);
+        return ucenterMemberOrder;
     }
 
 }

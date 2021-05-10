@@ -7,6 +7,7 @@ import com.lvgr.eduservice.entity.EduCourse;
 import com.lvgr.eduservice.entity.EduCourseDescription;
 import com.lvgr.eduservice.entity.EduTeacher;
 import com.lvgr.eduservice.entity.grontvo.CourseFrontVo;
+import com.lvgr.eduservice.entity.grontvo.CourseWebVo;
 import com.lvgr.eduservice.entity.vo.CourseInfoVo;
 import com.lvgr.eduservice.entity.vo.CoursePublishVo;
 import com.lvgr.eduservice.mapper.EduCourseMapper;
@@ -176,7 +177,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     }
 
     @Override
-    public EduCourse getCourseDescById(String courseId) {
-        return null;
+    public CourseWebVo getCourseDescById(String courseId) {
+        return baseMapper.getCourseDescById(courseId);
     }
 }

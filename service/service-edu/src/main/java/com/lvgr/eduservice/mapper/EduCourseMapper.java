@@ -2,6 +2,7 @@ package com.lvgr.eduservice.mapper;
 
 import com.lvgr.eduservice.entity.EduCourse;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.lvgr.eduservice.entity.grontvo.CourseWebVo;
 import com.lvgr.eduservice.entity.vo.CoursePublishVo;
 
 /**
@@ -19,4 +20,5 @@ public interface EduCourseMapper extends BaseMapper<EduCourse> {
      */
     CoursePublishVo selectCoursePublishVoById(String courseId);
 
+    CourseWebVo getCourseDescById(String courseId);
 }

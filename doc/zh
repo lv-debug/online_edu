@@ -189,6 +189,20 @@
     27.2 在短信服务中找到国内消息：在模板管理中添加新的模板（短信通知、），在签名管理中添加新的签名（验证码）。
     27.3 编写MsmController的sendMsm方法传递需要接受验证码的手机号
 
+28 引入微信二维码的依赖
+    28.1 <dependencies>
+             <dependency>
+                 <groupId>com.github.wxpay</groupId>
+                 <artifactId>wxpay-sdk</artifactId>
+                 <version>0.0.3</version>
+             </dependency>
+             <dependency>
+                 <groupId>com.alibaba</groupId>
+                 <artifactId>fastjson</artifactId>
+             </dependency>
+         </dependencies>
+    28.2 生成二维码代码实现：createRWCode
+
 
 
 
