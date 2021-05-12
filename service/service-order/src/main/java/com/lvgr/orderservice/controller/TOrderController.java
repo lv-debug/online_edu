@@ -13,6 +13,7 @@ import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * <p>
@@ -48,5 +49,16 @@ public class TOrderController {
         return Result.ok().data("order",order);
     }
 
+    @GetMapping("isBuyCourse/{courseId}/{memberId}")
+    @ApiOperation("根据用户id和课程id返回课程支付状态")
+    public boolean isBuyCourse(@PathVariable String courseId,@PathVariable String memberId){
+
+        QueryWrapper<TOrder> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("course_id",courseId);
+        queryWrapper.eq("member_id",memberId);
+        queryWrapper.eq("status",1);
+        int count = tOrderService.count(queryWrapper);
+        return count > 0;
+    }
 }
 

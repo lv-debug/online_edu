@@ -16,4 +16,8 @@ import java.util.Map;
 public interface TPayLogService extends IService<TPayLog> {
 
     Map createRWCode(String orderNo);
+
+    Map queryRWCode(String orderNo);
+
+    void updateOrderStatus(Map<String,String> map);
 }

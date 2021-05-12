@@ -27,13 +27,26 @@ public class TPayLogController {
     @Autowired
     private TPayLogService tPayLogService;
 
-    //生成微信支付二维码
     @GetMapping("createRWCode/{orderNo}")
     @ApiOperation("根据订单号生成二维码")
     public Result createRWCode(@PathVariable String orderNo){
         Map map = tPayLogService.createRWCode(orderNo);
+        return Result.ok().data(map);
+    }
 
-        return Result.ok();
+    @GetMapping("queryRWCode/{orderNo}")
+    @ApiOperation("根据订单号查询支付状态")
+    public Result queryRWCode(@PathVariable String orderNo){
+        Map<String,String> map = tPayLogService.queryRWCode(orderNo);
+        if (map == null) {
+            return Result.error().message("支付出错");
+        }
+        //支付成功
+        if (map.get("trade_state").equals("SUCCESS")) {
+            tPayLogService.updateOrderStatus(map);
+            return Result.ok();
+        }
+        return Result.ok().code(25000).message("支付中");
     }
 
 }

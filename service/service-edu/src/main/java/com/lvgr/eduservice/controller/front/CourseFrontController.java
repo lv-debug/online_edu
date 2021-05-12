@@ -1,6 +1,7 @@
 package com.lvgr.eduservice.controller.front;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.lvgr.eduservice.client.OrderClient;
 import com.lvgr.eduservice.entity.EduCourse;
 import com.lvgr.eduservice.entity.EduTeacher;
 import com.lvgr.eduservice.entity.chapter.ChapterVo;
@@ -9,6 +10,7 @@ import com.lvgr.eduservice.entity.grontvo.CourseWebVo;
 import com.lvgr.eduservice.service.EduChapterService;
 import com.lvgr.eduservice.service.EduCourseService;
 import com.lvgr.eduservice.service.EduTeacherService;
+import com.lvgr.utils.JwtUtils;
 import com.lvgr.utils.Result;
 import com.lvgr.utils.ordervo.CourseWebVoOrder;
 import io.swagger.annotations.Api;
@@ -17,6 +19,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +40,8 @@ public class CourseFrontController {
     private EduChapterService eduChapterService;
     @Autowired
     private EduTeacherService eduTeacherService;
+    @Autowired
+    private OrderClient orderClient;
 
     @PostMapping("getCourseFrontList/{current}/{limit}")
     @ApiOperation("前台分页获取课程")
@@ -50,11 +55,14 @@ public class CourseFrontController {
 
     @GetMapping("getCourseDescById/{courseId}")
     @ApiOperation("前台获取课程详情")
-    public Result getCourseDescById(@PathVariable String courseId) {
+    public Result getCourseDescById(@PathVariable String courseId, HttpServletRequest request) {
         CourseWebVo courseWebVo = eduCourseService.getCourseDescById(courseId);
         List<ChapterVo> chapterVideoByCourse = eduChapterService.getChapterVideoByCourseId(courseId);
+        //根据用户id和课程id查询该课程是不是已经当前登录人购买了
+        boolean isbBuyCourse = orderClient.isBuyCourse(courseId, JwtUtils.getMemberIdByJwtToken(request));
         //返回分页的所有数据。
-        return Result.ok().data("courseWebVo",courseWebVo).data("chapterVideoByCourseId",chapterVideoByCourse);
+        return Result.ok().data("courseWebVo",courseWebVo).data("chapterVideoByCourseId",chapterVideoByCourse)
+                .data("isbBuyCourse",isbBuyCourse);
     }
 
     @PostMapping("getCourseByOrder/{id}")
