@@ -66,5 +66,13 @@ public class UcenterMemberController {
         return ucenterMemberOrder;
     }
 
+    @GetMapping("countRegister/{day}")
+    @ApiOperation("根据token获取用户")
+    public Result countRegister(@PathVariable String day){
+        //查询数据库根据用户id获取用户信息
+        int count = ucenterMemberService.countRegister(day);
+        return Result.ok().data("countRegister",count);
+    }
+
 }
 
