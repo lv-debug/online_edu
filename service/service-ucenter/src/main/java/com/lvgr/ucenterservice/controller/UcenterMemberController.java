@@ -20,10 +20,12 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author lvgr
  * @since 2021-04-22
+ *
+ * @CrossOrigin:使用nginx做反向代理需要该注解,目前使用的时gateway，在配置文件已经配置了跨域，所以不需要该注解
  */
 @RestController
 @RequestMapping("/ucenterservice/ucenter-member")
-@CrossOrigin
+//@CrossOrigin
 @Api(description = "会员用户注册中心管理")
 public class UcenterMemberController {
 

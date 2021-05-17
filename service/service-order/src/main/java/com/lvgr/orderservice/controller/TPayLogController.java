@@ -17,10 +17,12 @@ import java.util.Map;
  *
  * @author lvgr
  * @since 2021-05-07
+ *
+ * @CrossOrigin:使用nginx做反向代理需要该注解,目前使用的时gateway，在配置文件已经配置了跨域，所以不需要该注解
  */
 @RestController
 @RequestMapping("/orderservice/tPayLog")
-@CrossOrigin
+//@CrossOrigin
 @Api(description = "微信支付管理")
 public class TPayLogController {
 

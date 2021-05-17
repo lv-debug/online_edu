@@ -16,10 +16,12 @@ import java.io.IOException;
  * @author lvgr
  * @date 2021/3/19 23:00
  * @desc:文件上传实现类
+ *
+ * @CrossOrigin:使用nginx做反向代理需要该注解,目前使用的时gateway，在配置文件已经配置了跨域，所以不需要该注解
  */
 @RestController
 @RequestMapping("/eduoss/fileOss")
-@CrossOrigin
+//@CrossOrigin
 @Api(description = "上传")
 public class OssController {
 

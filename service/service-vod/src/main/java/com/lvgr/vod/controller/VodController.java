@@ -19,9 +19,18 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * 阿里云视频点播
+ *
+ * @author lvgr
+ * @since 2021-04-22
+ *
+ * @CrossOrigin:使用nginx做反向代理需要该注解,目前使用的时gateway，在配置文件已经配置了跨域，所以不需要该注解
+ */
+
 @RestController
 @RequestMapping("/eduvod/video")
-@CrossOrigin
+//@CrossOrigin
 public class VodController {
 
     @Autowired

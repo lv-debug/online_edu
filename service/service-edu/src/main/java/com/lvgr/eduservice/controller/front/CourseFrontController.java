@@ -27,8 +27,10 @@ import java.util.Map;
  * @author lvgr
  * @desc:课程前台控制层
  * @date 2021/4/25 20:29
+ *
+ * @CrossOrigin:使用nginx做反向代理需要该注解,目前使用的时gateway，在配置文件已经配置了跨域，所以不需要该注解
  */
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping("/eduservice/coursefront")
 @Api(description = "讲师前台管理")

@@ -21,8 +21,10 @@ import java.util.List;
  *
  * @author lvgr
  * @since 2021-04-18
+ *
+ * @CrossOrigin:使用nginx做反向代理需要该注解,目前使用的时gateway，在配置文件已经配置了跨域，所以不需要该注解
  */
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping("/eduservice/indexfront")
 @Api(description = "首页课程讲师前台管理")
