@@ -135,6 +135,42 @@
             hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds=6000
         23.6.3 在VodClient添加注解@FeignClient(name = "service-vod",fallback = VodClientErrorImpl.class)
         23.6.4 VodClientErrorImpl实现于在VodClient添加注解，表示出错后会执行的方法
+    23.7 nacos注册中心（配置中心）
+        23.7.1 在对应模块中的pom.xml引入依赖
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+            </dependency>
+        23.7.2 在nacos配置列表中添加配置项（http://localhost:8848/nacos）
+            23.7.2.1 Data ID 的完整规则格式如下
+               ${prefix}-${spring.profiles.active}.${file-extension}
+               - prefix 默认为所属工程配置spring.application.name 的值（即：nacos-provider），也可以通过配置项 spring.cloud.nacos.config.prefix来配置。
+               - spring.profiles.active=dev 即为当前环境对应的 profile。 注意：当 spring.profiles.active 为空时，对应的连接符 - 也将不存在，dataId 的拼接格式变成 ${prefix}.${file-extension}
+               - file-exetension 为配置内容的数据格式，可以通过配置项 spring.cloud.nacos.config.file-extension 来配置。目前只支持 properties 和 yaml 类型。
+            23.7.2.2 Group为默认
+            23.7.2.3 配置格式为properties
+            23.7.2.4 配置内容为对应模块中的application.properties。（需要注释掉spring.profiles.active=dev，因为Data ID 包含了-dev）
+        23.7.3 添加bootstrap.properties文件
+            23.7.3.1 #配置中心地址
+                     spring.cloud.nacos.config.server-addr=127.0.0.1:8848
+                     spring.profiles.active=dev
+                     # 该配置影响统一配置中心中的dataId
+                     spring.application.name=service-acl
+        23.7.4 bootstrap与application
+               （1）加载顺序
+               这里主要是说明application和bootstrap的加载顺序。
+               bootstrap.yml（bootstrap.properties）先加载
+               application.yml（application.properties）后加载
+               bootstrap.yml 用于应用程序上下文的引导阶段。
+               bootstrap.yml 由父Spring ApplicationContext加载。
+               父ApplicationContext 被加载到使用 application.yml 的之前。
+    23.8 nacos注册中心（命名空间）
+        23.8.1 在nacos命名空间中添加test、dev、prod（http://localhost:8848/nacos）
+        23.8.2 当添加完成后，注册中心的配置列表就会出现test、dev、prod的模式，把public模式下的配置列表克隆的dev模式下
+        23.8.3 需要在bootstrap.properties里面添加命名空间
+            23.8.3.1 spring.cloud.nacos.config.namespace=6334b280-c876-499d-9a0a-6735046d11dd
+
+
 
 24 redis:内存数据库，适用缓存。
     24.1：nosql,key-value形式，支持持久化、通过内存进行存储，多种数据结构：string list hash set,支持事务。
