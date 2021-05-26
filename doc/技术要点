@@ -337,3 +337,22 @@
 
 35 jenkins安装
     35.1 在jenkins的war包的目录下cmd输入：java -jar jenkins.war
+    35.2 修改 hudson.model.UpdateCenter.xml的<url>https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json</url>
+    35.3 修改C:\Users\lvgr\.jenkins\updates\default.json
+    35.4 需要再项目的根目录下新建Dockerfile，用作执行jar包。
+    35.6 在项目的pom里面添加
+        打包的类型：<packaging>jar</packaging>
+        maven插件：<build>
+                        <finalName>demojenkins</finalName>
+                        <plugins>
+                            <plugin>
+                                <groupId>org.springframework.boot</groupId>
+                                <artifactId>spring-boot-maven-plugin</artifactId>
+                            </plugin>
+                        </plugins>
+                    </build>
+    35.7 在jenkins里面配置maven、git、jdk
+    35.8 新建item,配置github地址
+    35.9 配置docker脚本
+    35.10 构建项目bulid now。构建之前需要启动docker.
+
