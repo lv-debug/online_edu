@@ -120,7 +120,7 @@
 
     </dependencies>
     <build>
-        <!--调用mybatis的xml需要的配置 **表示多层目录-->
+        <!--，项目编译打包的时候，xml不会被maven进行编译，下面解决了maven会把xml文件编译到target里面。编译调用mybatis的xml需要的配置 **表示多层目录-->
         <resources>
             <resource>
                 <directory>src/main/java</directory>

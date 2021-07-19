@@ -356,3 +356,10 @@
     35.9 配置docker脚本
     35.10 构建项目bulid now。构建之前需要启动docker.
 
+
+6 项目启动流程
+    6.1 启动nacos
+    6.2 启动redis
+    6.3 先启动ApiGatewayApplication
+    6.4 再启动其他项目
+
